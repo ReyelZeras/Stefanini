@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerabilidades</title>
+    <link rel="stylesheet" href="front.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <label class="lbl_header">Vulnerabilidades</label>
+
+    </header>
+
+    <main>
+
+
+        <section class="enviar_arquivo">
+
+            <form action="">
+                
+            <label for="ifile">Entrar com o arquivo txt.</label>
+
+            <input id="ifile" type="file">
+
+            <button class="btn_enviar" type="submit">Enviar</button>
+
+            </form>
+
+
+        </section>
+
+        <section class="nova_vulnerabilidade">
+
+            <label class="lbl_titulo">Inserir vulnerabilidade</label class="lbl_titulo"><br>
+
+            <form class="form_inserir" action="">
+
+                <label for="ipt_vulnerabilidade">Nome:</label>
+                <input class="campo" id="ipt_vulnerabilidade" type="text" placeholder="Ex: Null Dereference">
+
+                <label for="ipt_criticidade">Criticidade:</label>
+
+                <select class="campo" name="" id="ipt_criticidade">
+                    <option hidden>Selecione uma criticidade</option>
+                    <option value="CRITICAL">CRITICAL</option>
+                    <option value="HIGH">HIGH</option>
+                    <option value="MEDIUM">MEDIUM</option>
+                    <option value="LOW">LOW</option>
+                </select>
+
+                <label for="ipt_tempo">Tempo médio para resolução (horas): </label>
+                <input class="campo" id="ipt_tempo" type="number" placeholder="Ex: 3">
+
+                <button class="btn_inserir" type="submit">Adicionar</button>
+
+            </form>
+
+
+        </section>
+
+    </main>
+
+
+
+</body>

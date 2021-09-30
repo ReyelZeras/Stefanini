@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.header{
+text-align: center;    
+font-size: 2em;
+}
+
+.enviar_arquivo{
+    margin-top: 2%;
+    text-align: center;
+    font-size: 1em;
+
+}
+
+#ifile{
+    font-size: 1em;
+    color: royalblue;
+}
+
+.btn_enviar{
+    font-size: 1em;
+    width: 5em;
+    cursor: pointer;
+}
+
+.nova_vulnerabilidade{
+    text-align: center;
+    margin-top: 5%;
+}
+
+.lbl_titulo{
+font-size: 2em;
+}
+
+.form_inserir{
+    margin-top: 2%;
+    font-size: 1em;
+}
+
+.campo{
+    height: 2em;
+    width: 15em;
+}
+
+.btn_inserir{
+    font-size: 1em;
+    width: 6em;
+    cursor: pointer;
+}
