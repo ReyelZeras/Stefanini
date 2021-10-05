@@ -5,8 +5,8 @@ use Stefanini;
 create table dados(
 idDados int primary key auto_increment,
 Nome varchar(100),
-Criticidade	Varchar(10),
-Horas int
+Criticidade	Varchar(100),
+Horas varchar(100)
 );
 
 drop table dados;
@@ -31,10 +31,10 @@ create table teste (
 
 idTeste int primary key auto_increment,
 Nome varchar(100),
-Quantidade int
+Quantidade varchar(100)
 
 );
-
+drop table teste;
 
 insert into teste (Nome, Quantidade)values
 ('Trust Boundary Violation', 89),
