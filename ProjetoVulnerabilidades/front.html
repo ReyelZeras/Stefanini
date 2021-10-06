@@ -13,7 +13,7 @@
 
     <header class="header">
 
-        <label class="lbl_header">Vulnerabilidades</label>
+        <h3 class="h1_header">Relatório de vulnerabilidade</h3>
 
     </header>
 
@@ -22,13 +22,17 @@
 
         <section class="enviar_arquivo">
 
+            <label class="lbl_titulo">Relatório de horas</label class="lbl_titulo"><br>
+
             <form action="">
                 
-            <label for="ifile">Entrar com o arquivo txt.</label>
+            <!-- <label for="ifile" class="lab_txt">Entrar com o arquivo txt.</label> -->
+            <label for="ifile" class="lab_txt">Escolha um arquivo com a extensão .txt 
+                para a geração do relatório</label>
 
             <input id="ifile" type="file">
 
-            <button class="btn_enviar" type="submit">Enviar</button>
+            <button class="btn_enviar" type="submit">Gerar relatório</button>
 
             </form>
 
@@ -41,10 +45,10 @@
 
             <form class="form_inserir" action="">
 
-                <label for="ipt_vulnerabilidade">Nome:</label>
+                <label for="ipt_vulnerabilidade" class="lbl_campo">Nome:</label>
                 <input class="campo" id="ipt_vulnerabilidade" type="text" placeholder="Ex: Null Dereference">
-
-                <label for="ipt_criticidade">Criticidade:</label>
+<br>
+                <label for="ipt_criticidade" class="lbl_campo">Criticidade:</label>
 
                 <select class="campo" name="" id="ipt_criticidade">
                     <option hidden>Selecione uma criticidade</option>
@@ -53,8 +57,8 @@
                     <option value="MEDIUM">MEDIUM</option>
                     <option value="LOW">LOW</option>
                 </select>
-
-                <label for="ipt_tempo">Tempo médio para resolução (horas): </label>
+<br>
+                <label for="ipt_tempo" class="lbl_campo">Tempo médio para resolução (horas): </label>
                 <input class="campo" id="ipt_tempo" type="number" placeholder="Ex: 3">
 
                 <button class="btn_inserir" type="submit">Adicionar</button>
