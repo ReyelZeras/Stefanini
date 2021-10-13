@@ -2,6 +2,7 @@ package br.com.stefanini.vulnerabilidades.persistence;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.stefanini.vulnerabilidades.entity.BaseDados;
@@ -12,10 +13,9 @@ public class BaseDadosDAO extends DAO implements IBaseDadosDAO {
 	public void insertTeste(BaseDados bd) throws Exception {
 		open();
 		try {
-			stmt = con.prepareStatement(
-					"insert into dados values (null, ?, ?, ?);",
+			stmt = con.prepareStatement("insert into dados values (null, ?, ?, ?);",
 					PreparedStatement.RETURN_GENERATED_KEYS);
-			
+
 			stmt.setString(1, bd.getNome());
 			stmt.setString(2, bd.getCriticidade());
 			stmt.setString(3, bd.getHora());
@@ -31,8 +31,40 @@ public class BaseDadosDAO extends DAO implements IBaseDadosDAO {
 
 	@Override
 	public List<BaseDados> findAllBaseDados() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+
+		open();
+		stmt = con.prepareStatement("select * from dados;");
+		rs = stmt.executeQuery();
+		List<BaseDados> bd = new ArrayList<>();
+		while (rs.next()) {
+			BaseDados bdados = new BaseDados();
+			bdados.setId(rs.getInt(1));
+			bdados.setNome(rs.getString(2));
+			bdados.setCriticidade(rs.getString(3));
+			bdados.setHora(rs.getString(4));
+			bd.add(bdados);
+		}
+		close();
+		return bd;
+
+	}
+
+	@Override
+	public BaseDados findByCriticidade(String nomeCriticidade) throws Exception {
+		open();
+		stmt = con.prepareStatement("select * from dados where nome=?;");
+		stmt.setString(1, nomeCriticidade);
+		rs = stmt.executeQuery();
+		BaseDados bdados = null;
+		if (rs.next()) {
+			bdados = new BaseDados();
+			bdados.setId(rs.getInt(1));
+			bdados.setNome(rs.getString(2));
+			bdados.setCriticidade(rs.getString(3));
+			bdados.setHora(rs.getString(4));
+		}
+		close();
+		return bdados;
 	}
 
 	@Override
@@ -59,7 +91,4 @@ public class BaseDadosDAO extends DAO implements IBaseDadosDAO {
 		return null;
 	}
 
-
-	
-	
 }

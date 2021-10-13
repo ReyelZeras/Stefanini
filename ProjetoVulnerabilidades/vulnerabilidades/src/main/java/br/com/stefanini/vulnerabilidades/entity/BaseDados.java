@@ -1,39 +1,51 @@
 package br.com.stefanini.vulnerabilidades.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
+//import javax.persistence.Table;
 
-@Entity
-@Table(name="baseDados")
+//@Entity
+//@Table(name="baseDados")
 public class BaseDados {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private String Nome;
 	private String Criticidade;
 	private String Hora;
 	
 	public BaseDados() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public BaseDados(Long id, String nome, String criticidade, String hora) {
+	public BaseDados(Integer id, String nome, String criticidade, String hora) {
 		super();
 		this.id = id;
 		Nome = nome;
 		Criticidade = criticidade;
 		Hora = hora;
 	}
+	
+	public BaseDados(String nome, String criticidade, String hora) {
+		super();
+		Nome = nome;
+		Criticidade = criticidade;
+		Hora = hora;
+	}
+	
+	public BaseDados(String nome) {
+		super();
+		Nome = nome;
+	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

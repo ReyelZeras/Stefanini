@@ -18,7 +18,7 @@ public static void main(String[] args) throws Exception {
 	
 	BaseDadosDAO bdDAO = new BaseDadosDAO();
 
-	String path2 = "C:\\Users\\Reyel Soares\\Documents\\base de dados.txt";
+	String path2 = "C:\\Users\\vitor\\Downloads\\base de dados.txt";
 	FileReader fr2 = null;
 	BufferedReader br2 = null;
 
@@ -27,7 +27,7 @@ public static void main(String[] args) throws Exception {
 		br2 = new BufferedReader(fr2);
 
 		String line = br2.readLine();
-		Long contador = (long) 11;
+		Integer contador = (Integer) 11;
 
 		while (line != null) {
 			line = br2.readLine();
@@ -38,8 +38,6 @@ public static void main(String[] args) throws Exception {
 			System.out.println(bd);
 			contador++;
 			bdDAO.insertTeste(bd);
-			
-			
 		}
 	} catch (IOException e) {
 		System.out.println("Error: " + e.getMessage());

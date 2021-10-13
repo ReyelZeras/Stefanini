@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Vulnerabilidades</title>
+	<link rel="stylesheet" th:href="@{/front.css}" />
+
+</head>
+
+<body>
+
+	<header class="header">
+		<h3 class="h1_header">Relatório de vulnerabilidade</h3>
+
+	</header>
+
+	<main>
+		<section class="enviar_arquivo">
+
+			<label class="lbl_titulo">Relatório de horas</label><br>
+
+			<form action="" method="post">
+
+				<!-- <label for="ifile" class="lab_txt">Entrar com o arquivo txt.</label> -->
+				<label for="ifile" class="lab_txt">Escolha um arquivo com a extensão .txt
+					para a geração do relatório</label>
+
+				<input id="ifile" type="file">
+
+				<button class="btn_enviar" type="submit">Gerar relatório</button>
+
+			</form>
+
+			<hr>
+
+			<p class="p_tabela">Tabela de vunerabilidades cadastradas</p>
+
+			<button class="btn_tabela"><a href="tabela.html" th:href="@{/tabela}">Acessar tabela</a></button>
+
+		</section>
+
+		<section class="nova_vulnerabilidade">
+
+			<label class="lbl_titulo">Inserir vulnerabilidade</label><br>
+
+			<form class="form_inserir" method="post" action="bd/control/insercaoBanco">
+
+				<label for="ipt_vulnerabilidade" class="lbl_campo">Nome:</label>
+				<input class="campo" name="nome" type="text" placeholder="Ex: Null Dereference" required>
+				<br>
+				<label for="ipt_criticidade" class="lbl_campo">Criticidade:</label>
+
+				<select name="criticidade" class="campo" required>
+					<option>Selecione uma criticidade</option>
+					<option value="CRITICAL">CRITICAL</option>
+					<option value="HIGH">HIGH</option>
+					<option value="MEDIUM">MEDIUM</option>
+					<option value="LOW">LOW</option>
+				</select>
+				<br>
+				<label for="ipt_tempo" class="lbl_campo">Tempo médio para resolução (horas): </label>
+				<input class="campo" name="hora" type="number" placeholder="Ex: 3" min="0" required>
+
+				<button class="btn_inserir" type="submit">Adicionar</button>
+
+			</form>
+		</section>
+		<input th:text="${alertCadastro}" type="hidden" onchange="funcao()" id="alertCadastro">
+	</main>
+	<script>
+		function funcao() {
+			
+			alert(document.getElementById("alertCadastro").textContent);
+		}
+	</script>
+</body>

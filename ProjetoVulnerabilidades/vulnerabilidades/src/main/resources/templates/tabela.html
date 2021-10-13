@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tabela de vunerabilidades</title>
+	<link rel="stylesheet" th:href="@{/front.css}"/>
+    <script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    
+    <header>
+        <h2 class="h2_title">Tabela de vunerabilidades cadastradas</h3>
+    </header>
+
+    <div class="container mt-5">
+        <table class="table table-striped table-bordered table-houver">
+            <thead class="text-center bg-dark text-warning">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Criticidade</th>
+                    <th>Tempo médio para resolução </th>
+                </tr>
+            </thead>
+            <tbody class="text-center">          
+
+            <tr th:each="basedados: ${listTabela}">
+                <td th:text="${basedados.id}"></td>
+                <td th:text="${basedados.nome}"></td>
+                <td th:text="${basedados.criticidade}"></td>
+                <td th:text="${basedados.hora}"></td> 
+            </tr>
+            
+            </tbody>
+        </table>
+        <button class="btn_voltar"><a href="index.html" th:href="@{/}">Voltar</a></button>
+    </div>
+
+    
+</body>

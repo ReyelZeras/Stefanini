@@ -19,5 +19,5 @@ public interface IBaseDadosDAO {
 
 	public String deleteBaseDados(Long id) throws Exception;
 	
-	
+	public BaseDados findByCriticidade(String nomeCriticidade) throws Exception;
 }

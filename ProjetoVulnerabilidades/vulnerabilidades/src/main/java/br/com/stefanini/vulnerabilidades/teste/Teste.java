@@ -15,7 +15,7 @@ Vulnerabilidades v = new Vulnerabilidades();
 		
 		ArquivoDAO arq = new ArquivoDAO();
 
-		String path = "C:\\Users\\Reyel Soares\\Documents\\massa de teste.txt";
+		String path = "C:\\Users\\vitor\\Downloads\\massa de teste.txt";
 		FileReader fr = null;
 		BufferedReader br = null;
 

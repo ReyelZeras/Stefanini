@@ -14,8 +14,8 @@ public class DAO implements IDAO {
 	ResultSet rs;
 	
 	public void open() throws Exception {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Stefanini?useSSL=false", "root", "140613");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Stefanini?useSSL=false", "root", "senha");
 		}
 
 	
