@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.stefanini.vulnerabilidades.entity.BaseDados;
 import br.com.stefanini.vulnerabilidades.persistence.BaseDadosDAO;
 
-@RequestMapping("bd/control")
+//@RequestMapping("bd/control")
 @Controller
 public class ControllerBaseDados {
 
@@ -26,7 +26,7 @@ public class ControllerBaseDados {
 			BaseDados vulnerabilidadeExistente = bdDao.findByCriticidade(nomeVulnerabilidade);
 			System.out.println(vulnerabilidadeExistente);
 
-			if (vulnerabilidadeExistente.equals(null)) {
+			if (vulnerabilidadeExistente == null) {
 				BaseDados bd = new BaseDados(nomeVulnerabilidade, criticidade, hora);
 				bdDao.insertTeste(bd);
 				System.out.println("\n\nVulnerabilidade cadastrada no banco");
@@ -37,7 +37,6 @@ public class ControllerBaseDados {
 				model.addAttribute("alertCadastro", "Vulnerabilidade já existente no banco!");
 			}
 		} catch (Exception e) {
-			System.out.println("\n\nFui para o catch");
 			e.printStackTrace();
 		}
 

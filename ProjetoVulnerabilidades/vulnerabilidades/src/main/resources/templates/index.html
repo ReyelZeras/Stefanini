@@ -22,15 +22,15 @@
 
 			<label class="lbl_titulo">Relatório de horas</label><br>
 
-			<form action="" method="post">
+			<form method="POST" enctype="multipart/form-data" action="/">
 
 				<!-- <label for="ifile" class="lab_txt">Entrar com o arquivo txt.</label> -->
 				<label for="ifile" class="lab_txt">Escolha um arquivo com a extensão .txt
 					para a geração do relatório</label>
 
-				<input id="ifile" type="file">
+				<input id="Ifile" type="file" name="file">
 
-				<button class="btn_enviar" type="submit">Gerar relatório</button>
+				<button class="btn_enviar" type="submit" value="Upload">Gerar relatório</button>
 
 			</form>
 
@@ -46,7 +46,7 @@
 
 			<label class="lbl_titulo">Inserir vulnerabilidade</label><br>
 
-			<form class="form_inserir" method="post" action="bd/control/insercaoBanco">
+			<form class="form_inserir" method="post" action="insercaoBanco">
 
 				<label for="ipt_vulnerabilidade" class="lbl_campo">Nome:</label>
 				<input class="campo" name="nome" type="text" placeholder="Ex: Null Dereference" required>
@@ -70,10 +70,4 @@
 		</section>
 		<input th:text="${alertCadastro}" type="hidden" onchange="funcao()" id="alertCadastro">
 	</main>
-	<script>
-		function funcao() {
-			
-			alert(document.getElementById("alertCadastro").textContent);
-		}
-	</script>
 </body>
