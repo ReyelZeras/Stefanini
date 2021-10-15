@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.stefanini.vulnerabilidades.controller.copy.ControllerIndex;
+import br.com.stefanini.vulnerabilidades.controller.ControllerIndex;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = ControllerIndex.class)

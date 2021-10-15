@@ -22,17 +22,21 @@
 
 			<label class="lbl_titulo">Relatório de horas</label><br>
 
-			<form method="POST" enctype="multipart/form-data" action="/">
+			<form method="POST" action="/upload" enctype="multipart/form-data">
 
 				<!-- <label for="ifile" class="lab_txt">Entrar com o arquivo txt.</label> -->
 				<label for="ifile" class="lab_txt">Escolha um arquivo com a extensão .txt
 					para a geração do relatório</label>
 
-				<input id="Ifile" type="file" name="file">
+				<input id="Ifile" type="file" name="files">
 
-				<button class="btn_enviar" type="submit" value="Upload">Gerar relatório</button>
+				<button class="btn_enviar" type="submit" value="Submit">Gerar relatório</button>
 
 			</form>
+
+			<div th:if="${message}">
+				<p th:text="${message}" />
+			</div>
 
 			<hr>
 

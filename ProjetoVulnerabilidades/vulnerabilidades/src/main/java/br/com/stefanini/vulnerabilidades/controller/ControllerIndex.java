@@ -1,4 +1,4 @@
-package br.com.stefanini.vulnerabilidades.controller.copy;
+package br.com.stefanini.vulnerabilidades.controller;
 
 import java.util.List;
 

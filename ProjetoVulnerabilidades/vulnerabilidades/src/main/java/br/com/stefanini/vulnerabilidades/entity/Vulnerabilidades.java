@@ -15,16 +15,17 @@ public class Vulnerabilidades {
 	private Long id;
 	private String vulnerabilidade;
 	private String quantidade;
+	private String nomeArquivo;
 	
 	public Vulnerabilidades() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public Vulnerabilidades(Long id, String vulnerabilidade, String quantidade) {
+	public Vulnerabilidades(Long id, String vulnerabilidade, String quantidade, String nomeArquivo) {
 		super();
 		this.id = id;
 		this.vulnerabilidade = vulnerabilidade;
 		this.quantidade = quantidade;
+		this.nomeArquivo = nomeArquivo;
 	}
 
 	public Long getId() {
@@ -51,11 +52,20 @@ public class Vulnerabilidades {
 		this.quantidade = quantidade;
 	}
 
+	public String getNomeArquivo() {
+		return nomeArquivo;
+	}
+
+	public void setNomeArquivo(String nomeArquivo) {
+		this.nomeArquivo = nomeArquivo;
+	}
+
 	@Override
 	public String toString() {
-		return "\nVulnerabilidades: id: " + id + ", Nome: " + vulnerabilidade + ", Quantidade: " + quantidade;
+		return "Vulnerabilidades [id=" + id + ", vulnerabilidade=" + vulnerabilidade + ", quantidade=" + quantidade
+				+ ", nomeArquivo=" + nomeArquivo + "]";
 	}
-	
 
+	
 
 }

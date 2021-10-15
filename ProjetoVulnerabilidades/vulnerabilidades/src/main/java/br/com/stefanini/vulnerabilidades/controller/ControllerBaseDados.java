@@ -1,4 +1,4 @@
-package br.com.stefanini.vulnerabilidades.controller.copy;
+package br.com.stefanini.vulnerabilidades.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

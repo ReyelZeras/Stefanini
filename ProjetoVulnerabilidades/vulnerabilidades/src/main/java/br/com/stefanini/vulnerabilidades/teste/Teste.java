@@ -1,6 +1,7 @@
 package br.com.stefanini.vulnerabilidades.teste;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -11,11 +12,13 @@ public class Teste {
 
 	public static void main(String[] args) throws Exception {
 
-Vulnerabilidades v = new Vulnerabilidades();
-		
-		ArquivoDAO arq = new ArquivoDAO();
+		Vulnerabilidades v = new Vulnerabilidades();
 
-		String path = "C:\\Users\\vitor\\Downloads\\massa de teste.txt";
+		ArquivoDAO arq = new ArquivoDAO();
+		File file = null;
+		String caminho = System.getProperty("user.home");
+		String path = caminho + File.separator + "Downloads" + file.getName();
+//		String path = "C:\\Users\\vitor\\Downloads\\massa de teste.txt";
 		FileReader fr = null;
 		BufferedReader br = null;
 
@@ -25,17 +28,18 @@ Vulnerabilidades v = new Vulnerabilidades();
 
 			String line = br.readLine();
 			Long contador = (long) 11;
+			file = new File(path);
 
 			while (line != null) {
 				line = br.readLine();
 				v.setVulnerabilidade(line.split(",")[0]);
 				v.setQuantidade(line.split(",")[1]);
 				v.setId(contador);
+				v.setNomeArquivo(file.getName());
 				System.out.println(v);
 				contador++;
 				arq.insertTeste(v);
-				
-				
+
 			}
 		} catch (IOException e) {
 			System.out.println("Error: " + e.getMessage());
@@ -51,7 +55,6 @@ Vulnerabilidades v = new Vulnerabilidades();
 				e.printStackTrace();
 			}
 		}
-
 
 	}
 
