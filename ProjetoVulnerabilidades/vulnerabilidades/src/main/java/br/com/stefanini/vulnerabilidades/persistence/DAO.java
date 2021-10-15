@@ -12,17 +12,15 @@ public class DAO implements IDAO {
 	Connection con;
 	PreparedStatement stmt;
 	ResultSet rs;
-	
-	public void open() throws Exception {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Stefanini?useSSL=false", "root", "@Fan3farra");
-		}
 
-	
+	public void open() throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Stefanini", "root", "@Fan3farra");
+	}
 
 	public void close() throws Exception {
 		con.close();
 
 	}
-	
+
 }
