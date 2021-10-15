@@ -32,7 +32,7 @@ public class ControllerBaseDados {
 				System.out.println("\n\nVulnerabilidade cadastrada no banco");
 				model.addAttribute("alertCadastro", "Vulnerabilidade cadastrada com sucesso!");
 			} else {
-//				System.out.println(String.valueOf(vulnerabilidadeExistente).equalsIgnoreCase(nomeVulnerabilidade));
+
 				System.out.println("\n\nVulnerabilidade já existente no banco!");
 				model.addAttribute("alertCadastro", "Vulnerabilidade já existente no banco!");
 			}

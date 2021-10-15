@@ -31,8 +31,9 @@ public class ArquivoDAO extends DAO implements IVulnerabilidadesDAO {
 	
 	public List<Vulnerabilidades> bucarRelatorio(String nomeArquivo) throws Exception {
 		open();
-		stmt = con.prepareStatement("select * from teste t inner join "
-				+ "dados d on d.Nome = t.Nome where t.nomeArquivo = ?;");
+		stmt = con.prepareStatement("select t.Nome, d.Criticidade, (t.Quantidade * d.Horas) "
+				+ "as TotalHoras from teste t inner join dados d on d.Nome = t.Nome where "
+				+ "t.nomeArquivo = ?;");
 		stmt.setString(1, nomeArquivo);
 		rs = stmt.executeQuery();
 		List<Vulnerabilidades> vul = new ArrayList<>();

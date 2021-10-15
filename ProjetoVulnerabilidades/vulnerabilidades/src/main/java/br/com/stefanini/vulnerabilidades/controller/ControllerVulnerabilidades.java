@@ -9,9 +9,11 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,7 +45,7 @@ public class ControllerVulnerabilidades {
 			System.out.println("caminhoArquivo: " + caminhoArquivo + files.getOriginalFilename());
 			Files.write(path, bytes);
 			nomeArquivo = files.getOriginalFilename();
-			
+
 			redirectAttributes.addFlashAttribute("message",
 					"Você enviou com sucesso '" + files.getOriginalFilename() + "'");
 
@@ -59,17 +61,13 @@ public class ControllerVulnerabilidades {
 				fr = new FileReader(caminhoFolder);
 				br = new BufferedReader(fr);
 
-				String line = br.readLine();
+				String line;
 				Long contador = (long) 11;
 				File file = new File(caminhoFolder);
 
-				while (line != null) {
+				while ((line = br.readLine()) != null) {
 
-					if (line == null) {
-						break;
-					}
-					
-					line = br.readLine();
+//					line = br.readLine();
 					v.setVulnerabilidade(line.split(",")[0]);
 					v.setQuantidade(line.split(",")[1]);
 					v.setId(contador);
@@ -97,34 +95,39 @@ public class ControllerVulnerabilidades {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		return "redirect:/gerandoRelatorio";
+		write(nomeArquivo);
+		return "redirect:/";
 	}
 
-	@PostMapping("/gerandoRelatorio")
-	public static boolean Write(String nomeArquivo) throws Exception {
-		
+	@GetMapping("/gerandoRelatorio")
+	public String write(String nomeArquivo) throws Exception {
+
 		try {
-			
+
 			ArquivoDAO arqDao = new ArquivoDAO();
-			
+
 			List<Vulnerabilidades> relatorio = arqDao.bucarRelatorio(nomeArquivo);
-			
-			String caminho = "relatório.txt";
+
+			String caminho = caminhoArquivo + File.separator + "relatório.txt";
 
 			FileWriter arq = new FileWriter(caminho);
+
+//			for (Vulnerabilidades vulnerabilidades : relatorio) {
+//				System.out.println(vulnerabilidades);
+//				arq.write(vulnerabilidades.toString());
+//			}
+			
 			PrintWriter gravarArq = new PrintWriter(arq);
 			gravarArq.println(relatorio);
 			gravarArq.close();
-			
+
 			System.out.println("Arquivo salvo com sucesso!");
-			
-			return true;
+
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 			System.out.println("Erro ao salvar o arquivo!");
-			return false;
 		}
+		return "redirect:/";
 	}
 
 }

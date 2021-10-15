@@ -5,11 +5,11 @@ use Stefanini;
 create table dados(
 idDados int primary key auto_increment,
 Nome varchar(100),
-Criticidade	Varchar(100),
-Horas varchar(100)
+Criticidade	Varchar(10),
+Horas varchar(20)
 );
 
-drop table dados;
+## drop table dados;
 
 insert into dados (Nome, Criticidade, Horas)values
 ('Cross-Site Scripting: DOM',	'Critical',	1),
@@ -26,24 +26,22 @@ insert into dados (Nome, Criticidade, Horas)values
 
 select * from dados;
 
+select * from dados where nome="Cross-Site Scripting: DOM";
+desc dados;
+
 
 create table teste (
-
 idTeste int primary key auto_increment,
 Nome varchar(100),
-Quantidade varchar(100)
-
+Quantidade varchar(100),
+NomeArquivo varchar(100)
 );
-drop table teste;
 
-insert into teste (Nome, Quantidade)values
-('Trust Boundary Violation', 89),
-('Cross-Site Scripting: Persistent', 76),
-('Poor Style: Value Never Read', 71),
-('Cross-Site Scripting: Poor Validation', 68),
-('System Information Leak: Internal', 62);
+##drop table teste;
 
 select * from teste;
+
+desc teste;
 
 insert into dados (Nome, Criticidade, Horas)values
 ('Trust Boundary Violation', 'High', 2),
@@ -52,11 +50,11 @@ insert into dados (Nome, Criticidade, Horas)values
 ('Cross-Site Scripting: Poor Validation', 'Critical', 3),
 ('System Information Leak: Internal', 'Low', 1);
 
-
 select t.Nome, d.Criticidade, (t.Quantidade * d.Horas) as TotalHoras
 from teste t
 inner join dados d
 on d.Nome = t.Nome;
- 
 
+select t.Nome, d.Criticidade, (t.Quantidade * d.Horas) as TotalHoras from teste t inner join dados d on d.Nome = t.Nome where t.nomeArquivo = "massa de teste (1).txt";
  
+## replace
