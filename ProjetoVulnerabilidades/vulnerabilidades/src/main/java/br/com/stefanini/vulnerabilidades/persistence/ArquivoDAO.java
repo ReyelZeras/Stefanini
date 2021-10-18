@@ -10,11 +10,11 @@ import br.com.stefanini.vulnerabilidades.persistence.interfaces.IVulnerabilidade
 
 public class ArquivoDAO extends DAO implements IVulnerabilidadesDAO {
 
+	@Override
 	public void insertTeste(Vulnerabilidades v) throws Exception {
 		open();
 		try {
-			stmt = con.prepareStatement(
-					"insert into teste values (null, ?, ?, ?);",
+			stmt = con.prepareStatement("insert into teste values (null, ?, ?, ?);",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, v.getVulnerabilidade());
 			stmt.setString(2, v.getQuantidade());
@@ -28,21 +28,20 @@ public class ArquivoDAO extends DAO implements IVulnerabilidadesDAO {
 			close();
 		}
 	}
-	
-	public List<Vulnerabilidades> bucarRelatorio(String nomeArquivo) throws Exception {
+
+	@Override
+	public List<Vulnerabilidades> bucarVulnerabilidadeNaoCadastradas(String nomeArquivo) throws Exception {
 		open();
-		stmt = con.prepareStatement("select t.Nome, d.Criticidade, (t.Quantidade * d.Horas) "
-				+ "as TotalHoras from teste t inner join dados d on d.Nome = t.Nome where "
-				+ "t.nomeArquivo = ?;");
+		stmt = con.prepareStatement("select t.Nome, t.Quantidade from teste t where "
+				+ "t.Nome not in (select d.Nome from dados d where t.nomeArquivo = ?); ");
 		stmt.setString(1, nomeArquivo);
 		rs = stmt.executeQuery();
 		List<Vulnerabilidades> vul = new ArrayList<>();
 		while (rs.next()) {
 			Vulnerabilidades v = new Vulnerabilidades();
-			v.setId(rs.getLong(1));
-			v.setVulnerabilidade(rs.getString(2));
-			v.setQuantidade(rs.getString(3));
-			v.setNomeArquivo(rs.getString(4));
+			v.setVulnerabilidade(rs.getString(1));
+			v.setQuantidade(rs.getString(2));
+			v.setNomeArquivo(nomeArquivo);
 			vul.add(v);
 		}
 		close();
@@ -50,33 +49,43 @@ public class ArquivoDAO extends DAO implements IVulnerabilidadesDAO {
 	}
 
 	@Override
-	public List<Vulnerabilidades> findAllVulnerabilidades() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Vulnerabilidades> bucarRelatorio(String nomeArquivo) throws Exception {
+		open();
+		stmt = con.prepareStatement("select t.Nome, d.Criticidade, t.Quantidade, (t.Quantidade * d.Horas) "
+				+ "as TotalHoras from teste t inner join dados d on d.Nome = t.Nome where " + "t.nomeArquivo = ?;");
+		stmt.setString(1, nomeArquivo);
+		rs = stmt.executeQuery();
+		List<Vulnerabilidades> vul = new ArrayList<>();
+		while (rs.next()) {
+			Vulnerabilidades v = new Vulnerabilidades();
+			v.setVulnerabilidade(rs.getString(1));
+			v.setCriticidade(rs.getString(2));
+			v.setQuantidade(rs.getString(3));
+			v.setTotalHoras(rs.getString(4));
+			v.setNomeArquivo(nomeArquivo);
+			vul.add(v);
+		}
+		close();
+		return vul;
 	}
 
-	@Override
-	public Vulnerabilidades findById(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String createVulnerabilidade(Vulnerabilidades vulnerabilidades) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String updateVulnerabilidade(Vulnerabilidades vulnerabilidades) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String deleteVulnerabilidade(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public Boolean buscarArquivo(String nomeArquivo) throws Exception {
+//		try {
+//			open();
+//			stmt = con.prepareStatement("select nomeArquivo from teste where nomeArquivo = ?");
+//			stmt.setString(1, nomeArquivo);
+//			rs = stmt.executeQuery();
+//			Vulnerabilidades vul = null;
+//			while (rs.next()) {
+//				Vulnerabilidades v = new Vulnerabilidades();
+//				v.setNomeArquivo(rs.getString(1));
+//			}
+//			return true;
+//		} catch (Exception ex) {
+//			return false;
+//		} finally {
+//			close();
+//		}
+//	}
 
 }

@@ -26,7 +26,9 @@
 
 				<!-- <label for="ifile" class="lab_txt">Entrar com o arquivo txt.</label> -->
 				<label for="ifile" class="lab_txt">Escolha um arquivo com a extensão .txt
-					para a geração do relatório</label>
+					para a geração do relatório.</label>
+					<label class="lab_txt atencao">Atenção: para gerar o relatório o arquivo a ser
+					carregado precisa estar na pasta <b>"Donwload"</b> do seu computador.</label>
 
 				<input id="Ifile" type="file" name="files">
 
@@ -34,8 +36,8 @@
 
 			</form>
 
-			<div th:if="${message}">
-				<p th:text="${message}" />
+			<div th:if="${sucesso}">
+				<p th:text="${sucesso}" />
 			</div>
 
 			<hr>
@@ -59,10 +61,10 @@
 
 				<select name="criticidade" class="campo" required>
 					<option>Selecione uma criticidade</option>
-					<option value="CRITICAL">CRITICAL</option>
-					<option value="HIGH">HIGH</option>
-					<option value="MEDIUM">MEDIUM</option>
-					<option value="LOW">LOW</option>
+					<option value="Critical">Critical</option>
+					<option value="High">High</option>
+					<option value="Medium">Medium</option>
+					<option value="Low">Low</option>
 				</select>
 				<br>
 				<label for="ipt_tempo" class="lbl_campo">Tempo médio para resolução (horas): </label>
@@ -71,7 +73,8 @@
 				<button class="btn_inserir" type="submit">Adicionar</button>
 
 			</form>
+			<input th:text="${alertCadastro}" type="hidden" onchange="funcao()" id="alertCadastro">
 		</section>
-		<input th:text="${alertCadastro}" type="hidden" onchange="funcao()" id="alertCadastro">
+
 	</main>
 </body>

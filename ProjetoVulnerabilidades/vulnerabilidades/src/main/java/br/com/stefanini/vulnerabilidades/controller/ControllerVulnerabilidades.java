@@ -9,14 +9,15 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.stefanini.vulnerabilidades.entity.Vulnerabilidades;
@@ -46,10 +47,6 @@ public class ControllerVulnerabilidades {
 			Files.write(path, bytes);
 			nomeArquivo = files.getOriginalFilename();
 
-			redirectAttributes.addFlashAttribute("message",
-					"Você enviou com sucesso '" + files.getOriginalFilename() + "'");
-
-			// Começa aqui
 			Vulnerabilidades v = new Vulnerabilidades();
 			ArquivoDAO arq = new ArquivoDAO();
 
@@ -67,16 +64,18 @@ public class ControllerVulnerabilidades {
 
 				while ((line = br.readLine()) != null) {
 
-//					line = br.readLine();
 					v.setVulnerabilidade(line.split(",")[0]);
-					v.setQuantidade(line.split(",")[1]);
+					v.setQuantidade(line.split(",")[1].replace(";", ""));
 					v.setId(contador);
 					v.setNomeArquivo(file.getName());
 					System.out.println(v);
 					contador++;
 					arq.insertTeste(v);
-
 				}
+
+				redirectAttributes.addFlashAttribute("message",
+						"Você enviou com sucesso '" + files.getOriginalFilename() + "'");
+
 			} catch (IOException e) {
 				System.out.println("Error: " + e.getMessage());
 			} finally {
@@ -91,33 +90,23 @@ public class ControllerVulnerabilidades {
 					e.printStackTrace();
 				}
 			}
-			// Termina aqui
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		write(nomeArquivo);
-		return "redirect:/";
+		return "redirect:/gerandoRelatorio";
 	}
 
 	@GetMapping("/gerandoRelatorio")
-	public String write(String nomeArquivo) throws Exception {
+	public String write() throws Exception {
 
 		try {
-
 			ArquivoDAO arqDao = new ArquivoDAO();
 
-			List<Vulnerabilidades> relatorio = arqDao.bucarRelatorio(nomeArquivo);
-
-			String caminho = caminhoArquivo + File.separator + "relatório.txt";
-
+			String caminho = caminhoArquivo + File.separator + "relatório-" + nomeArquivo + ".txt";
 			FileWriter arq = new FileWriter(caminho);
-
-//			for (Vulnerabilidades vulnerabilidades : relatorio) {
-//				System.out.println(vulnerabilidades);
-//				arq.write(vulnerabilidades.toString());
-//			}
-			
 			PrintWriter gravarArq = new PrintWriter(arq);
+			List<Vulnerabilidades> relatorio = arqDao.bucarRelatorio(nomeArquivo);
 			gravarArq.println(relatorio);
 			gravarArq.close();
 
@@ -127,7 +116,29 @@ public class ControllerVulnerabilidades {
 			System.out.println(e.getMessage());
 			System.out.println("Erro ao salvar o arquivo!");
 		}
-		return "redirect:/";
+		return "redirect:/pesquisaVulnerabilidade";
+	}
+
+	@GetMapping("/pesquisaVulnerabilidade")
+	public ModelAndView insertBancoVulnerabilidade(Model model) {
+
+		ArquivoDAO arqDao = new ArquivoDAO();
+
+		try {
+			List<Vulnerabilidades> vulnerabilidadeNaoCadastradas = arqDao
+					.bucarVulnerabilidadeNaoCadastradas(nomeArquivo);
+
+			if (vulnerabilidadeNaoCadastradas.size() >= 1) {
+				model.addAttribute("listVulnerabilidade", vulnerabilidadeNaoCadastradas);
+				return new ModelAndView("vulnerabilidaExistente");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("message", "Você enviou com sucesso " + nomeArquivo);
+		model.addAttribute("sucesso", "Relatório gerado com sucesso - Verifique a pasta Donwload");
+		return new ModelAndView("index");
 	}
 
 }

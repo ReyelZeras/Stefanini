@@ -9,7 +9,7 @@ Criticidade	Varchar(10),
 Horas varchar(20)
 );
 
-## drop table dados;
+drop table dados;
 
 insert into dados (Nome, Criticidade, Horas)values
 ('Cross-Site Scripting: DOM',	'Critical',	1),
@@ -37,18 +37,20 @@ Quantidade varchar(100),
 NomeArquivo varchar(100)
 );
 
-##drop table teste;
+#drop table teste;
 
 select * from teste;
 
 desc teste;
 
-insert into dados (Nome, Criticidade, Horas)values
-('Trust Boundary Violation', 'High', 2),
-('Cross-Site Scripting: Persistent', 'Low',3),
-('Poor Style: Value Never Read', 'High', 4),
-('Cross-Site Scripting: Poor Validation', 'Critical', 3),
-('System Information Leak: Internal', 'Low', 1);
+##select nomeArquivo from teste where nomeArquivo = "";
+
+##insert into dados (Nome, Criticidade, Horas)values
+##('Trust Boundary Violation', 'High', 2),
+##('Cross-Site Scripting: Persistent', 'Low',3),
+##('Poor Style: Value Never Read', 'High', 4),
+##('Cross-Site Scripting: Poor Validation', 'Critical', 3),
+##('System Information Leak: Internal', 'Low', 1);
 
 select t.Nome, d.Criticidade, (t.Quantidade * d.Horas) as TotalHoras
 from teste t
@@ -56,5 +58,26 @@ inner join dados d
 on d.Nome = t.Nome;
 
 select t.Nome, d.Criticidade, (t.Quantidade * d.Horas) as TotalHoras from teste t inner join dados d on d.Nome = t.Nome where t.nomeArquivo = "massa de teste (1).txt";
+
+select t.Nome, t.Quantidade from teste t where t.Nome not in (select d.Nome from dados d where t.nomeArquivo =  "massa de teste (1).txt"); 
+
+select t.Nome from dados d inner join teste t on t.Nome = d.Nome where t.nomeArquivo =  "massa de teste (1).txt" 
+and t.Nome not exists (select Nome from dados)
+
+## not exists 
+describe teste;
+describe dados;
  
+update teste set Quantidade = replace(quantidade, ';', '') where idTeste in (1, 2, 3, 4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,
+24,
+25,
+26,
+27,
+28,
+29,
+30,
+31,
+32);
+select idTeste from teste;
+
 ## replace

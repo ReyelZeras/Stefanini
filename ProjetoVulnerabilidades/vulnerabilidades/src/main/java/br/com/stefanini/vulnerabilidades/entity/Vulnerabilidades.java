@@ -1,22 +1,14 @@
 package br.com.stefanini.vulnerabilidades.entity;
 
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-//import javax.persistence.Table;
-
-
-//@Entity
-//@Table(name="vulnerabilidades")
 public class Vulnerabilidades {
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Long id;
 	private String vulnerabilidade;
 	private String quantidade;
 	private String nomeArquivo;
-	
+	private String criticidade;
+	private String totalHoras;
+
 	public Vulnerabilidades() {
 	}
 
@@ -60,12 +52,27 @@ public class Vulnerabilidades {
 		this.nomeArquivo = nomeArquivo;
 	}
 
-	@Override
-	public String toString() {
-		return "Vulnerabilidades [id=" + id + ", vulnerabilidade=" + vulnerabilidade + ", quantidade=" + quantidade
-				+ ", nomeArquivo=" + nomeArquivo + "]";
+	public String getTotalHoras() {
+		return totalHoras;
 	}
 
-	
+	public void setTotalHoras(String totalHoras) {
+		this.totalHoras = totalHoras;
+	}
+
+	public String getCriticidade() {
+		return criticidade;
+	}
+
+	public void setCriticidade(String criticidade) {
+		this.criticidade = criticidade;
+	}
+
+	@Override
+	public String toString() {
+
+		return "\nVulnerabilidade: " + vulnerabilidade + ", Criticidade: " + criticidade + ", Quantidade: " + quantidade
+				+ ", Total horas: " + totalHoras + ", Nome do Arquivo: " + nomeArquivo;
+	}
 
 }

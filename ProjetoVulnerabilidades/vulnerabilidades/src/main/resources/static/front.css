@@ -127,3 +127,11 @@ button a{
     width: 10%;
     /* float: right; */
 }
+
+.atencao{
+	color: red;
+}
+
+.p_center{
+	text-align: center;
+}
