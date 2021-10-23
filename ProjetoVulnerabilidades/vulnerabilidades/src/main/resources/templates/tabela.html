@@ -6,42 +6,152 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Tabela de vunerabilidades</title>
-	<link rel="stylesheet" th:href="@{/front.css}"/>
-    <script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" th:href="@{/front.css}" />
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
-    
-    <header>
-        <h2 class="h2_title">Tabela de vunerabilidades cadastradas</h2>
-    </header>
 
-    <div class="container mt-5">
-        <table class="table table-striped table-bordered table-houver">
-            <thead class="text-center bg-dark text-warning">
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Criticidade</th>
-                    <th>Tempo médio para resolução </th>
-                </tr>
-            </thead>
-            <tbody class="text-center">          
+	<header>
+		<h2 class="h2_title" id="h2_title">Tabela de vunerabilidades cadastradas</h2>
+	</header>
 
-            <tr th:each="basedados: ${listTabela}">
-                <td th:text="${basedados.id}"></td>
-                <td th:text="${basedados.nome}"></td>
-                <td th:text="${basedados.criticidade}"></td>
-                <td th:text="${basedados.hora}"></td> 
-            </tr>
-            
-            </tbody>
-        </table>
-        <button class="btn_voltar"><a href="index.html" th:href="@{/}">Voltar</a></button>
-    </div>
+	<div class="container mt-5">
+		<table class="table table-striped table-bordered table-houver">
+			<thead class="text-center bg-dark text-warning">
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Criticidade</th>
+					<th>Tempo médio para resolução </th>
+					<th>Resolução</th>
+				</tr>
+			</thead>
+			<tbody class="text-center">
 
-    
+				<tr th:each="basedados: ${listTabela}">
+					<td th:text="${basedados.id}"></td>
+					<td th:text="${basedados.nome}"></td>
+					<td th:text="${basedados.criticidade}"></td>
+					<td th:text="${basedados.hora}"></td>
+					<td>
+						<button class="btn btn-dark text-warning" data-toggle="modal" data-target="#exampleModal"
+							th:attr="data-target='#exampleModal'+${basedados.id}">
+							<i class="fas fa-eye"></i> Visualizar
+						</button>
+
+						<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true" th:id="exampleModal+${basedados.id}">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Resolução</h5>
+										<button type="button" class="close btn btn-danger" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<!-- <div class="modal-body" th:each="selectBase: ${mostrandoSolucao}"> -->
+									<form method="post" th:action="@{/updateBanco}">
+										<div class="modal-body">
+											<!-- <form th:each="basedados: ${listTabela}"> -->
+											<div class="form-group form-row">
+												<!-- <div class="form-inline"> -->
+
+												<div class="col-md-3 mb-3 marginr inlineInput">
+													<label for="recipient-name" class="col-form-label">ID:</label>
+													<input type="text" class="form-control input-inline"
+														id="recipient-name" th:value="${basedados.id}" disabled>
+													<input th:value="${basedados.id}" name="id" class="invisivel">
+												</div>
+												<div class="col-md-4 mb-3 inlineInput marginr">
+													<label for="recipient-name"
+														class="col-form-label">Criticidade:</label>
+													<input type="text" class="form-control input-inline"
+														id="recipient-name" name="criticidade"
+														th:value="${basedados.criticidade}">
+												</div>
+												<div class="col-md-4 mb-3 inlineInput">
+													<label for="recipient-name"
+														class="col-form-label">Resolução(horas):</label>
+													<input type="number" class="form-control input-inline"
+														id="recipient-name" name="horas" th:value="${basedados.hora}">
+												</div>
+												<!-- </div> -->
+											</div>
+											<div class="form-group">
+												<label for="recipient-name" class="col-form-label">Nome:</label>
+												<input type="text" class="form-control" id="recipient-name" name="nome"
+													th:value="${basedados.nome}">
+											</div>
+											<div class="form-group mt-3">
+												<label for="message-text" class="col-form-label">Solução:</label>
+												<textarea class="form-control input_mensagem" id="message-text"
+													th:utext="${basedados.solucao}" name="solucao"
+													onkeyup="limite_textarea(this.value)" maxlength='7000'></textarea>
+												<div class="mt-2">
+													<span id="cont">7000</span> caracteres restantes
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Fechar</button>
+											<button type="submit" class="btn btn-success"><i class="fas fa-save"></i>
+												Salvar Alteração</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<button class="btn_voltar"><a href="index.html" th:href="@{/}">Voltar</a></button>
+	</div>
+
 </body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
+<script>
+
+	// var textoid = document.getElementById("inputvalue").textContent;
+	// var tamanho = document.querySelectorAll(".inputvalue").length;
+	// for(var i = 1; i <= tamanho; i++){
+
+	$('#exampleModal').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var recipient = button.data('exampleModal')
+		// var recipient = document.getElementById("id").val; 
+		// var modal = $(this)
+		// modal.find('.modal-title').text('Resolução do ID: ' + recipient)
+		// modal.find('.modal-body input').val(recipient)
+	})
+
+
+	function limite_textarea(valor) {
+		quant = 7000;
+		total = valor.length;
+
+		if (total <= (quant - total)) {
+			resto = quant - total;
+			document.getElementById('cont').innerHTML = resto;
+		} else {
+			document.getElementById('message-text').value = valor.substr(0, quant);
+		}
+	}
+</script>
+
+</html>

@@ -3,7 +3,6 @@ package br.com.stefanini.vulnerabilidades.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,6 +40,45 @@ public class ControllerBaseDados {
 		}
 
 		return new ModelAndView("index");
+	}
+
+//	@PostMapping("selectBanco")
+//	public ModelAndView selectBancoVulnerabilidade(
+//			@RequestParam(value = "id", required = false) 
+//			String idVulnerabilidade, Model model) {
+//
+//		BaseDadosDAO bdDao = new BaseDadosDAO();
+//		System.out.println("id: " + idVulnerabilidade);
+//		try {
+//			List<BaseDados> mostrandoSolucao = bdDao.findByResolucao(idVulnerabilidade);
+////			for(Object mostra: mostrandoSolucao) {
+////				System.out.println(mostra.toString());
+////			}
+//				
+//			model.addAttribute("mostrandoSolucao", mostrandoSolucao);
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		return new ModelAndView("redirect:/tabela");
+//	}
+
+	@PostMapping("updateBanco")
+	public String updateBancoVulnerabilidade(@RequestParam(value = "id", required = false) String id,
+			@RequestParam(value = "criticidade", required = false) String criticidade,
+			@RequestParam(value = "horas", required = false) String hora,
+			@RequestParam(value = "nome", required = false) String vulnerabilidade,
+			@RequestParam(value = "solucao", required = false) String solucao) {
+
+		BaseDados bd = new BaseDados(Integer.valueOf(id), criticidade, hora, vulnerabilidade, solucao);
+		BaseDadosDAO bdDao = new BaseDadosDAO();
+		try {
+			bdDao.updateBaseDados(bd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/tabela";
 	}
 
 }

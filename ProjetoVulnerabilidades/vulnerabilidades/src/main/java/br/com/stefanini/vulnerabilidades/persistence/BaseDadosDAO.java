@@ -42,6 +42,7 @@ public class BaseDadosDAO extends DAO implements IBaseDadosDAO {
 			bdados.setNome(rs.getString(2));
 			bdados.setCriticidade(rs.getString(3));
 			bdados.setHora(rs.getString(4));
+			bdados.setSolucao(rs.getString(5));
 			bd.add(bdados);
 		}
 		close();
@@ -66,6 +67,39 @@ public class BaseDadosDAO extends DAO implements IBaseDadosDAO {
 		close();
 		return bdados;
 	}
+	
+	@Override
+	public void updateBaseDados(BaseDados baseDados) throws Exception {
+		open();
+		stmt = con.prepareStatement(
+				"update dados set nome=?, criticidade=?, horas=?, solucao=? where idDados=?");
+		stmt.setString(1, baseDados.getNome());
+		stmt.setString(2, baseDados.getCriticidade());
+		stmt.setString(3, baseDados.getHora());
+		stmt.setString(4, baseDados.getSolucao());
+		stmt.setInt(5, baseDados.getId());
+		stmt.executeUpdate();
+		close();
+	}
+
+//	public List<BaseDados> findByResolucao(String idVulnerabilidade) throws Exception {
+//		open();
+//		stmt = con.prepareStatement("select idDados, nome, solucao from dados where idDados=?;");
+//		stmt.setString(1, idVulnerabilidade);
+//		rs = stmt.executeQuery();
+//		List<BaseDados> bd = new ArrayList<>();
+//		if (rs.next()) {
+//			BaseDados bdados = new BaseDados();
+//			bdados.setId(rs.getInt(1));
+//			bdados.setNome(rs.getString(2));
+//			bdados.setSolucao(rs.getString(3));
+//			bd.add(bdados);
+//		}
+//		close();
+//		return bd;
+//	}
+	
+	
 
 	@Override
 	public BaseDados findById(Long id) throws Exception {
@@ -78,13 +112,7 @@ public class BaseDadosDAO extends DAO implements IBaseDadosDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public String updateBaseDados(BaseDados baseDados) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public String deleteBaseDados(Long id) throws Exception {
 		// TODO Auto-generated method stub

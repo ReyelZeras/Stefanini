@@ -1,44 +1,47 @@
 package br.com.stefanini.vulnerabilidades.entity;
 
 //import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-//import javax.persistence.Table;
 
 //@Entity
-//@Table(name="baseDados")
 public class BaseDados {
-	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Integer id;
-	private String Nome;
-	private String Criticidade;
-	private String Hora;
-	
+	private String nome;
+	private String criticidade;
+	private String hora;
+	private String solucao;
+
 	public BaseDados() {
-		
+
+	}
+
+	public BaseDados(Integer id, String criticidade, String hora, String nome, String solucao) {
+		super();
+		this.id = id;
+		this.criticidade = criticidade;
+		this.hora = hora;
+		this.nome = nome;
+		this.solucao = solucao;
 	}
 
 	public BaseDados(Integer id, String nome, String criticidade, String hora) {
 		super();
 		this.id = id;
-		Nome = nome;
-		Criticidade = criticidade;
-		Hora = hora;
+		this.nome = nome;
+		this.criticidade = criticidade;
+		this.hora = hora;
 	}
-	
+
 	public BaseDados(String nome, String criticidade, String hora) {
 		super();
-		Nome = nome;
-		Criticidade = criticidade;
-		Hora = hora;
+		this.nome = nome;
+		this.criticidade = criticidade;
+		this.hora = hora;
 	}
-	
+
 	public BaseDados(String nome) {
 		super();
-		Nome = nome;
+		this.nome = nome;
 	}
 
 	public Integer getId() {
@@ -50,36 +53,40 @@ public class BaseDados {
 	}
 
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 
 	public String getCriticidade() {
-		return Criticidade;
+		return criticidade;
 	}
 
 	public void setCriticidade(String criticidade) {
-		Criticidade = criticidade;
+		this.criticidade = criticidade;
 	}
 
 	public String getHora() {
-		return Hora;
+		return hora;
 	}
 
 	public void setHora(String hora) {
-		Hora = hora;
+		this.hora = hora;
+	}
+
+	public String getSolucao() {
+		return solucao;
+	}
+
+	public void setSolucao(String solucao) {
+		this.solucao = solucao;
 	}
 
 	@Override
 	public String toString() {
-		return "\nBase de dados: id :" + id + ", Nome: " + Nome + ", Criticidade: " + Criticidade + ", Hora: " + Hora;
+		return "\nBase de dados: id :" + id + ", Nome: " + nome + ", solucao: " + solucao;
 	}
-	
-	
-	
-	
-	
+
 }

@@ -135,3 +135,37 @@ button a{
 .p_center{
 	text-align: center;
 }
+
+.invisivel{
+    /* visibility: hidden; */
+    display: none;
+}
+
+.btn{
+	padding: .100rem .75rem;
+}
+
+.close{
+    border: none;
+    border-radius: 10px;
+    padding: 2% 3% 2% 3%;
+    font-weight: bold;
+}
+
+.form-group{
+    text-align: left;
+}
+
+.inlineInput{
+    display: inline-block;
+}
+
+.marginr{
+    margin-right: 2%;
+}
+
+.input_mensagem{
+    letter-spacing: 2px;
+    resize: none;
+    height: 20vh;
+}

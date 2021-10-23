@@ -15,7 +15,7 @@ public interface IBaseDadosDAO {
 
 	public String createBaseDados(BaseDados baseDados) throws Exception;
 
-	public String updateBaseDados(BaseDados baseDados) throws Exception;
+	public void updateBaseDados(BaseDados baseDados) throws Exception;
 
 	public String deleteBaseDados(Long id) throws Exception;
 	
