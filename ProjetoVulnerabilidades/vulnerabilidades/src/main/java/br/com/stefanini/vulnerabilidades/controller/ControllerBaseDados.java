@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.stefanini.vulnerabilidades.entity.BaseDados;
 import br.com.stefanini.vulnerabilidades.persistence.BaseDadosDAO;
 
-//@RequestMapping("bd/control")
 @Controller
 public class ControllerBaseDados {
 
@@ -41,28 +40,6 @@ public class ControllerBaseDados {
 
 		return new ModelAndView("index");
 	}
-
-//	@PostMapping("selectBanco")
-//	public ModelAndView selectBancoVulnerabilidade(
-//			@RequestParam(value = "id", required = false) 
-//			String idVulnerabilidade, Model model) {
-//
-//		BaseDadosDAO bdDao = new BaseDadosDAO();
-//		System.out.println("id: " + idVulnerabilidade);
-//		try {
-//			List<BaseDados> mostrandoSolucao = bdDao.findByResolucao(idVulnerabilidade);
-////			for(Object mostra: mostrandoSolucao) {
-////				System.out.println(mostra.toString());
-////			}
-//				
-//			model.addAttribute("mostrandoSolucao", mostrandoSolucao);
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		return new ModelAndView("redirect:/tabela");
-//	}
 
 	@PostMapping("updateBanco")
 	public String updateBancoVulnerabilidade(@RequestParam(value = "id", required = false) String id,

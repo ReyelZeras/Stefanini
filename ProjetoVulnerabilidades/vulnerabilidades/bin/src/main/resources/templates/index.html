@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Vulnerabilidades</title>
+	<link rel="stylesheet" th:href="@{/front.css}" />
+
+</head>
+
+<body>
+
+	<header class="header">
+		<h3 class="h1_header">Relatório de vulnerabilidade</h3>
+
+	</header>
+
+	<main>
+		<section class="enviar_arquivo">
+
+			<label class="lbl_titulo">Relatório de horas</label><br>
+
+			<form method="POST" action="/upload" enctype="multipart/form-data">
+
+				<!-- <label for="ifile" class="lab_txt">Entrar com o arquivo txt.</label> -->
+				<label for="ifile" class="lab_txt">Escolha um arquivo com a extensão .txt
+					para a geração do relatório.</label>
+					<label class="lab_txt atencao">Atenção: para gerar o relatório o arquivo a ser
+					carregado precisa estar na pasta <b>"Download"</b> do seu computador.</label>
+
+				<input id="Ifile" type="file" name="files">
+
+				<button class="btn_enviar" type="submit" value="Submit">Gerar relatório</button>
+
+			</form>
+
+			<div th:if="${sucesso}">
+				<p th:text="${sucesso}" />
+			</div>
+
+			<hr>
+
+			<p class="p_tabela">Tabela de vunerabilidades cadastradas</p>
+
+			<button class="btn_tabela"><a href="tabela.html" th:href="@{/tabela}">Acessar tabela</a></button>
+
+		</section>
+
+		<section class="nova_vulnerabilidade">
+
+			<label class="lbl_titulo">Inserir vulnerabilidade</label><br>
+
+			<form class="form_inserir" method="post" action="insercaoBanco">
+
+				<label for="ipt_vulnerabilidade" class="lbl_campo">Nome:</label>
+				<input class="campo" name="nome" type="text" placeholder="Ex: Null Dereference" required>
+				<br>
+				<label for="ipt_criticidade" class="lbl_campo">Criticidade:</label>
+
+				<select name="criticidade" class="campo" required>
+					<option>Selecione uma criticidade</option>
+					<option value="Critical">Critical</option>
+					<option value="High">High</option>
+					<option value="Medium">Medium</option>
+					<option value="Low">Low</option>
+				</select>
+				<br>
+				<label for="ipt_tempo" class="lbl_campo">Tempo médio para resolução (horas): </label>
+				<input class="campo" name="hora" type="number" placeholder="Ex: 3" min="0" required>
+
+				<button class="btn_inserir" type="submit">Adicionar</button>
+
+			</form>
+			<input th:text="${alertCadastro}" type="hidden" onchange="funcao()" id="alertCadastro">
+		</section>
+
+	</main>
+</body>

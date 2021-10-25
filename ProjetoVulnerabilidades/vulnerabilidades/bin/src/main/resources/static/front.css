@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.header{
+    text-align: center;    
+    font-size: 2em;
+    margin: 2% auto 5% auto;
+}
+
+/* .h1_header{
+    width: 40%;
+    margin: auto;
+} */
+
+.enviar_arquivo{
+    /* margin-top: 2%; */
+    margin: 2% auto;
+    text-align: center;
+    font-size: 1em;
+    float: left;
+    width: 50%;
+}
+
+#ifile{
+    font-size: 1em;
+    color: royalblue;
+    display: block;
+    margin: 2% auto 2% auto;
+}
+
+.lab_txt{
+    margin: 2% auto 2% auto;
+    display: block;
+    width: 50%;
+}
+
+.btn_enviar{
+    font-size: 1em;
+    width: 10em;
+    cursor: pointer;
+    display: block;
+    margin: 5% auto 2% auto;
+}
+
+hr{
+    width: 60%;
+    margin: 5% auto 5%;
+    height: 2px;
+    background-color: black;
+    border: none;
+}
+
+.p_tabela{
+    font-weight: bold;
+}
+
+.btn_tabela{
+    margin-top: 2%;
+}
+
+button a{
+    color: black;
+    text-decoration: none;
+    
+}
+
+.nova_vulnerabilidade{
+    text-align: center;
+    margin: 2% auto;
+    float:right;
+    width: 50%;
+}
+
+
+
+.lbl_titulo{
+    font-size: 25px;
+    margin-bottom: 3%;
+    font-weight: bold;
+}
+
+.form_inserir{
+    margin-top: 2%;
+    font-size: 1em;
+}
+
+.lbl_campo{
+    display: block;
+    /* text-align: left; */
+    
+}
+
+.campo{
+    height: 2em;
+    width: 15em;
+    display: inline-block;
+    margin: 0.5% auto 3% auto;
+}
+
+.btn_inserir{
+    font-size: 1em;
+    width: 6em;
+    cursor: pointer;
+    display: block;
+    margin: 1% auto 2% auto;
+}
+
+/* Página Tabela */
+
+.h2_title{
+    font-weight: bold;
+    text-align: center;
+    margin:3% 0 3% 0;
+}
+
+.table{
+    margin: auto;
+}
+
+.btn_voltar{
+    width: 10%;
+    /* float: right; */
+}
+
+.atencao{
+	color: red;
+}
+
+.p_center{
+	text-align: center;
+}
+
+.invisivel{
+    /* visibility: hidden; */
+    display: none;
+}
+
+.btn{
+	padding: .100rem .75rem;
+}
+
+.close{
+    border: none;
+    border-radius: 10px;
+    padding: 2% 3% 2% 3%;
+    font-weight: bold;
+}
+
+.form-group{
+    text-align: left;
+}
+
+.inlineInput{
+    display: inline-block;
+}
+
+.marginr{
+    margin-right: 2%;
+}
+
+.input_mensagem{
+    letter-spacing: 2px;
+    resize: none;
+    height: 20vh;
+}

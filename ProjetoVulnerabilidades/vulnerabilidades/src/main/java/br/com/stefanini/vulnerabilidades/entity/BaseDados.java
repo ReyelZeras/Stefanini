@@ -1,8 +1,5 @@
 package br.com.stefanini.vulnerabilidades.entity;
 
-//import javax.persistence.Entity;
-
-//@Entity
 public class BaseDados {
 
 	private Integer id;

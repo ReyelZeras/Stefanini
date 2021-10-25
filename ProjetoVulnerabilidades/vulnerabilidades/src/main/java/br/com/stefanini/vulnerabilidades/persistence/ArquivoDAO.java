@@ -69,23 +69,4 @@ public class ArquivoDAO extends DAO implements IVulnerabilidadesDAO {
 		return vul;
 	}
 
-//	public Boolean buscarArquivo(String nomeArquivo) throws Exception {
-//		try {
-//			open();
-//			stmt = con.prepareStatement("select nomeArquivo from teste where nomeArquivo = ?");
-//			stmt.setString(1, nomeArquivo);
-//			rs = stmt.executeQuery();
-//			Vulnerabilidades vul = null;
-//			while (rs.next()) {
-//				Vulnerabilidades v = new Vulnerabilidades();
-//				v.setNomeArquivo(rs.getString(1));
-//			}
-//			return true;
-//		} catch (Exception ex) {
-//			return false;
-//		} finally {
-//			close();
-//		}
-//	}
-
 }
