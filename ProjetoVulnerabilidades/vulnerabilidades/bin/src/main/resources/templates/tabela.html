@@ -54,12 +54,9 @@
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
-									<!-- <div class="modal-body" th:each="selectBase: ${mostrandoSolucao}"> -->
 									<form method="post" th:action="@{/updateBanco}">
 										<div class="modal-body">
-											<!-- <form th:each="basedados: ${listTabela}"> -->
 											<div class="form-group form-row">
-												<!-- <div class="form-inline"> -->
 
 												<div class="col-md-3 mb-3 marginr inlineInput">
 													<label for="recipient-name" class="col-form-label">ID:</label>
@@ -127,17 +124,10 @@
 	crossorigin="anonymous"></script>
 <script>
 
-	// var textoid = document.getElementById("inputvalue").textContent;
-	// var tamanho = document.querySelectorAll(".inputvalue").length;
-	// for(var i = 1; i <= tamanho; i++){
-
 	$('#exampleModal').on('show.bs.modal', function (event) {
 		var button = $(event.relatedTarget)
 		var recipient = button.data('exampleModal')
-		// var recipient = document.getElementById("id").val; 
-		// var modal = $(this)
-		// modal.find('.modal-title').text('Resolução do ID: ' + recipient)
-		// modal.find('.modal-body input').val(recipient)
+
 	})
 
 
